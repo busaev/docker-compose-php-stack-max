@@ -6,7 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # staff
 RUN apt-get update \
-    && apt-get -y --no-install-recommends install net-tools git curl gnupg make zip libicu-dev gzip zlib1g-dev libxml2-dev libpq-dev libyaml-dev libmcrypt-dev libmemcached-dev libtidy-dev libxslt-dev libpng-dev libzmq3-dev
+    && apt-get -y --no-install-recommends install sed net-tools git curl gnupg make zip libicu-dev gzip zlib1g-dev libxml2-dev libpq-dev libyaml-dev libmcrypt-dev libmemcached-dev libtidy-dev libxslt-dev libpng-dev libzmq3-dev
 
 RUN docker-php-ext-install -j$(nproc) iconv intl xml soap opcache pdo pdo_mysql pgsql pdo_pgsql mysqli tidy mbstring exif xsl gd
 

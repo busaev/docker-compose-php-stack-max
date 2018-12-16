@@ -1,61 +1,61 @@
 version: "3.1"
 services:
 
-#    memcached:
-#      image: memcached:alpine
-#      container_name: php-stack-memcached
-#
-#    mailhog:
-#      image: mailhog/mailhog:latest
-#      container_name: php-stack-mailhog
-#      ports:
-#        - "2081:8025"
-#
-#    redis:
-#      image: redis:alpine
-#      container_name: php-stack-redis
-#
-#    mysql:
-#      image: mysql:8.0
-#      container_name: php-stack-mysql
-#      working_dir: /application
-#      volumes:
-#        - .:/application
-#      environment:
-#        - MYSQL_ROOT_PASSWORD=q1w2e3q1w2e3
-#        - MYSQL_DATABASE=application
-#        - MYSQL_USER=dev
-#        - MYSQL_PASSWORD=q1w2e3
-#      ports:
-#        - "2082:3306"
-#
-#    postgres:
-#      image: postgres:latest
-#      container_name: php-stack-postgres
-#      working_dir: /application
-#      volumes:
-#        - .:/application
-#      environment:
-#        - POSTGRES_USER=dev
-#        - POSTGRES_PASSWORD=q1w2e3
-#        - POSTGRES_DB=application
-#      ports:
-#        - "5432:5432"
-#      networks:
-#        - postgres
-#      restart: unless-stopped
-#
-#    pgadmin:
-#      image: dpage/pgadmin4:latest
-#      container_name: php-stack-pgadmin
-#      environment:
-#        PGADMIN_DEFAULT_EMAIL: dev@dev.ru
-#        PGADMIN_DEFAULT_PASSWORD: q1w2e3
-#      ports:
-#        - "2084:80"
-#      networks:
-#        - postgres
-#      restart: unless-stopped
+    memcached:
+      image: memcached:alpine
+      container_name: php-stack-memcached
+
+    mailhog:
+      image: mailhog/mailhog:latest
+      container_name: php-stack-mailhog
+      ports:
+        - "2081:8025"
+
+    redis:
+      image: redis:alpine
+      container_name: php-stack-redis
+
+    mysql:
+      image: mysql:8.0
+      container_name: php-stack-mysql
+      working_dir: /application
+      volumes:
+        - .:/application
+      environment:
+        - MYSQL_ROOT_PASSWORD=q1w2e3q1w2e3
+        - MYSQL_DATABASE=application
+        - MYSQL_USER=dev
+        - MYSQL_PASSWORD=q1w2e3
+      ports:
+        - "2082:3306"
+
+    postgres:
+      image: postgres:latest
+      container_name: php-stack-postgres
+      working_dir: /application
+      volumes:
+        - .:/application
+      environment:
+        - POSTGRES_USER=dev
+        - POSTGRES_PASSWORD=q1w2e3
+        - POSTGRES_DB=application
+      ports:
+        - "5432:5432"
+      networks:
+        - postgres
+      restart: unless-stopped
+
+    pgadmin:
+      image: dpage/pgadmin4:latest
+      container_name: php-stack-pgadmin
+      environment:
+        PGADMIN_DEFAULT_EMAIL: dev@dev.ru
+        PGADMIN_DEFAULT_PASSWORD: q1w2e3
+      ports:
+        - "2084:80"
+      networks:
+        - postgres
+      restart: unless-stopped
 
     webserver:
       image: nginx:alpine
@@ -77,55 +77,55 @@ services:
         - .:/application
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
 
-#    elasticsearch:
-#      build:
-#        context: phpdocker/elasticsearch/
-#        args:
-#          ELK_VERSION: $ELK_VERSION
-#      container_name: php-stack-elasticsearch
-#      volumes:
-#        - ./phpdocker/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
-#      ports:
-#        - "9200:9200"
-#        - "9300:9300"
-#      environment:
-#        ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-#      networks:
-#        - elk
-#
-#    logstash:
-#      build:
-#        context: phpdocker/logstash/
-#        args:
-#          ELK_VERSION: $ELK_VERSION
-#      container_name: php-stack-logstash
-#      volumes:
-#        - ./phpdocker/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-#        - ./phpdocker/logstash/pipeline:/usr/share/logstash/pipeline:ro
-#      ports:
-#        - "5000:5000"
-#        - "9600:9600"
-#      environment:
-#        LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-#      networks:
-#        - elk
-#      depends_on:
-#        - elasticsearch
-#
-#    kibana:
-#      build:
-#        context: phpdocker/kibana/
-#        args:
-#          ELK_VERSION: $ELK_VERSION
-#      container_name: php-stack-kibana
-#      volumes:
-#        - ./phpdocker/kibana/config/:/usr/share/kibana/config:ro
-#      ports:
-#        - "5601:5601"
-#      networks:
-#        - elk
-#      depends_on:
-#        - elasticsearch
+    elasticsearch:
+      build:
+        context: phpdocker/elasticsearch/
+        args:
+          ELK_VERSION: $ELK_VERSION
+      container_name: php-stack-elasticsearch
+      volumes:
+        - ./phpdocker/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      ports:
+        - "9200:9200"
+        - "9300:9300"
+      environment:
+        ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      networks:
+        - elk
+
+    logstash:
+      build:
+        context: phpdocker/logstash/
+        args:
+          ELK_VERSION: $ELK_VERSION
+      container_name: php-stack-logstash
+      volumes:
+        - ./phpdocker/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+        - ./phpdocker/logstash/pipeline:/usr/share/logstash/pipeline:ro
+      ports:
+        - "5000:5000"
+        - "9600:9600"
+      environment:
+        LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      networks:
+        - elk
+      depends_on:
+        - elasticsearch
+
+    kibana:
+      build:
+        context: phpdocker/kibana/
+        args:
+          ELK_VERSION: $ELK_VERSION
+      container_name: php-stack-kibana
+      volumes:
+        - ./phpdocker/kibana/config/:/usr/share/kibana/config:ro
+      ports:
+        - "5601:5601"
+      networks:
+        - elk
+      depends_on:
+        - elasticsearch
 
 networks:
   postgres:
