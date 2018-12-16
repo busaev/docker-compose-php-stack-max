@@ -36,4 +36,4 @@ COPY ./conf.d/20_opcache.ini /usr/local/etc/php/conf.d/20_opcache.ini
 COPY ./conf.d/20_xdebug.ini /usr/local/etc/php/conf.d/20_xdebug.ini
 
 RUN HOST_IP="$(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')" \
-    && sed -i "$ a\xdebug.remote_host=${HOST_IP}"cat
+    && sed -i "$ a\xdebug.remote_host=${HOST_IP}"
