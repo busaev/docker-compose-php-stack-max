@@ -1,6 +1,7 @@
  Основано на
  * https://github.com/deviantony/docker-elk
  * https://phpdocker.io/generator
+ * https://github.com/jorge07/symfony-4-es-cqrs-boilerplate
  
  Service|Hostname|Port number
  ------|---------|-----------
