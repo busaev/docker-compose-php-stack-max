@@ -20,3 +20,20 @@
 В контейнер php-fpm установлены:
 * https://getcomposer.org
 * https://nodejs.org/en/
+
+
+# Настройка Xdebug и  PHPSTORM
+
+### В docker-compose.yml:
+В конфиге php-fpm нужно пробросить переменную окружения, примерно так:
+    
+    PHP_IDE_CONFIG: serverName=docker
+    
+
+А в PHPSTORM, в настройках проекта:
+
+`Languages & Frameworks` > `PHP` > `Servers`:
+
+  * Name: имя сервера должно равняться значению  переменной `PHP_IDE_CONFIG` (`docker` в нашем случае)
+
+Перезапускаем дебагер, все должно работать
