@@ -46,7 +46,7 @@ services:
       restart: unless-stopped
 
     pgadmin:
-      image: dpage/pgadmin4:latest
+      image: dpage/pgadmin4:4.1
       container_name: php-stack-pgadmin
       environment:
         PGADMIN_DEFAULT_EMAIL: dev@dev.ru
