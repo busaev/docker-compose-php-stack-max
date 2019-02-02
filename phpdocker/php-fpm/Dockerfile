@@ -28,7 +28,8 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && mv composer.phar /usr/local/bin/composer
 
 #symfony
-RUN  curl -sS https://get.symfony.com/cli/installer | bash
+RUN  curl -sS https://get.symfony.com/cli/installer | bash \
+    && ln -s /root/.symfony/bin/symfony /usr/local/bin/symfony
 
 COPY ./conf.d/20_opcache.ini /usr/local/etc/php/conf.d/20_opcache.ini
 COPY ./conf.d/20_xdebug.ini /usr/local/etc/php/conf.d/20_xdebug.ini
