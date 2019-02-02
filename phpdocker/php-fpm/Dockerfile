@@ -6,7 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # staff
 RUN apt-get update \
-    && apt-get -y --no-install-recommends install git curl gnupg make zip libicu-dev gzip zlib1g-dev libxml2-dev libpq-dev libyaml-dev libmcrypt-dev libmemcached-dev libtidy-dev libxslt-dev libpng-dev libzmq3-dev nodejs
+    && apt-get -y --no-install-recommends install git curl gnupg make zip libicu-dev gzip zlib1g-dev libxml2-dev libpq-dev libyaml-dev libmcrypt-dev libmemcached-dev libtidy-dev libxslt-dev libpng-dev libzmq3-dev software-properties-common
 
 RUN docker-php-ext-install -j$(nproc) iconv intl xml soap opcache pdo pdo_mysql pgsql pdo_pgsql mysqli tidy mbstring exif xsl gd zip
 
@@ -30,6 +30,14 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 #symfony
 RUN  curl -sS https://get.symfony.com/cli/installer | bash \
     && ln -s /root/.symfony/bin/symfony /usr/local/bin/symfony
+
+#nodejs
+RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - \
+    && apt-get update \
+    && apt-get install -y nodejs \
+    && node -v \
+    && npm -v  \
+    && npm install yarn -g
 
 COPY ./conf.d/20_opcache.ini /usr/local/etc/php/conf.d/20_opcache.ini
 COPY ./conf.d/20_xdebug.ini /usr/local/etc/php/conf.d/20_xdebug.ini
